@@ -62,5 +62,5 @@ int _printf(const char *format, ...)
     }
 
     va_end (args);
-    reutn (count);
+    return (count);
     }
