@@ -26,31 +26,30 @@ int _printf(const char *format, ...)
 			switch (format[i])
 			{
 				case 'c':
-					c = va_arg(agrs, int);
+					c = va_arg(args, int);
 					putchar(c);
 					count++;
 					break;
-				case 's';
+				case 's':
 					str = va_arg(args, char *);
 					if (!str)
 						str = "(null)";
 					while (*str)
 					{
-						putchar (*str);
+						putchar(*str);
 						str++;
 						count++;
 					}
 					break;
 				case '%':
-					putchar ('%');
+					putchar('%');
 					count++;
 					break;
 				default:
-					putchar ('%');
-					putchar (format[i]);
+					putchar('%');
+					putchar(format[i]);
 					count += 2;
 					break;
-
 			}
 		}
 		else
@@ -61,6 +60,6 @@ int _printf(const char *format, ...)
 		i++;
 	}
 
-	va_end (args);
+	va_end(args);
 	return (count);
 }
