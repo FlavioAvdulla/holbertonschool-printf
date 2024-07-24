@@ -1,151 +1,88 @@
-# holbertonschool-printf
+# The awesome _printf() function
 
-## Përkufizimi i funksionit
-```
-int _printf(const char *format, ...)
-```
-Ky funksion merr si vlerë një string me emërtimin "format" dhe një numër të pa caktuar argumentesh.
+**_printf** - formatted output conversion
 
-## Deklarimi i variablave
+**#include "holberton.h"**
+**int _printf(const char** *format* **, ...);**
 
-```
-va_list args;
-int printed_chars = 0;
-const char *p;
-```
+## Description
+The **_printf()** function produce output according to a *format* as described below. Also, write output to *stdout*, the standard output stream.
 
-**va_list args**
-(Mban informacionin e nevojshëm për të tërhequr argumentet përkatëse:
+The  **_printf()** function write the output under the control of a format string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of ***stdarg(3)*** are converted for output.
 
-`int print_char(va_list args);
-int print_string(va_list args);
-int print_int(va_list args);`
+### Format of the format string
 
-**int printed_chars = 0**
+The format string is a character string, beginning and ending inits  initial shift state, if any. The format string is composed of zero or more  directives:  ordinary  characters  (not %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.
+Each conversion specification is introduced by the character % and ends with conversion specifier.
 
-Ky int ruan numrin e karaktereve të printuara.
+### Conversion specifiers
+A character that specifies the type of conversion to be applied. The conversion specifiers and their meaning are:
+-  **d, i**: The **_int_** argument should be signed decimal notation, and the resulting number is written.
+-  **c**: The **_int_** argument is converted to a char, and the resulting character is written.
+-  **s**: The **_const char_** * argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up  to  (but not including) a terminating null byte ('\0').
+- **%**: A '**%**' is written. No argument is converted. The complete conversion specification is '**%%**'.
 
-**(const char `*`p)**
-Një pointer string me emërtimin "p".
+## About Functions
 
-## Inicializimi i `va_list`
-```
-va_start(args, format)
-```
-Inicializon **args** për të tërhequr argumentet shtesë pas parametrit **"format"**.
+### int _write(char c)
+This function gets a char parameter and writes the parameter to the stdout, the standard output stream.
 
-## Iterimi për string-un "format"
-```
-for (p = format; *p != '\0'; p++)
-```
-Bëhet e mundur kalimi në të gjitha karakteret e vargut një nga një deri sa të arrihet në fund të tij në `'\0'`.
+### int _print_a_char (va_list args)
+This function gets a variadic arguments list, traverse the list, prints each character of char type and returns
+the length of the character.
 
-## Përcaktimi i formatit të Pointer **`*`p**
-```
-if (*p == '%')
-```
-Kontrollon nëse karakteri aktual është një `%`, duke treguar fillimin e një specifikuesi të formatit.
+### int _print_a_string (va_list args)
+This function gets a variadic arguments list, traverse the list, prints each string and returns the length of the
+string.
 
-```
-p++;
-```
-Bën të mundur kalimin në karakterin tjetër, e cila përcakton tipin e argumentit për tu printuar.
+### int _print_a_integer (va_list args)
+This function gets a variadic arguments list, traverse the list, prints each number of int type and returns the
+length of the integer.
 
-```
-switch (*p)
-```
-Bën të mundur që nëpërmjet tipit të karakterit të percaktoj tipin  e pointerit dhe ë thëras bllokun e kodit përkatës për të realizuar printimin.
+### int _print_format (const char *format, va_list args)
+This function gets a format to be printed and a variadic arguments list, next to check if the
+format is valid or invalid and according with the verification the resulting output is written to the standard output stream and returns the format length.
 
-## Karakter i tipit char `%c`
-```
-case 'c':
-{
-    char c = va_arg(args, int);
-    write(1, &c, 1);
-    printed_chars++;
-    break;
-}
-```
+### int _print_spec (char format, va_list args):
+This function gets a format valid to be printed and a variadic arguments list to find the format in the
+list and selects the appropriate function to execute and writes the format to the standard output stream and returns the length of the valid format.
 
-Ekzekutohet blloku i kodit pasi `switch (*p)` ka përcaktuar tipin e pointer-it bazuar tek karakteri akutal i string (vargut).
+### int _print_invalid_spec (char prev_format, char format, int count)
+This function gets the previous format of the current format, the actual format and the current count of printed characters. Next, the invalid format is written to the standard output stream and returns the length of the invalid format.
 
-`printed_chars++;` kalon në karakterin e radhës.
+### void _recursion_integer(int a)
+This function gets an integer and prints the last digit of the number as recursion is applied.
 
-`break;` Mbaron veprimi.
+### int _validate_char(char _type)
+Gets a type and checks if the passed parameter is present in a structure of valid conversion specifiers. Next, returns if the parameter is valid or invalid.
 
-## Karakter i tipit char * `%s`
 
-```
-case 's':
-{
-    char *str = va_arg(args, char *);
-    if (str == NULL)
-        str = "(null)";
-    while (*str)
-    {
-        write(1, str, 1);
-        str++;
-        printed_chars++;
-    }
-    break;
-}
-```
-Ekzekutohet blloku i kodit pasi `switch (*p)` ka përcaktuar tipin e pointer-it bazuar tek karakteri akutal i string (vargut).
+## Return Value
 
-`printed_chars++;`kalon në karakterin e radhës.
 
-`break;` Mbaron veprimi.
+Upon successful return, the **_printf()** function return the number of characters printed (excluding the null byte used to end output to strings).
 
-## Karakter i tipit int `%d` dhe `%i`
-```
-case 'd':
-case 'i':
-{
-    int num = va_arg(args, int);
-    char buffer[50];
-    int len = snprintf(buffer, 50, "%d", num);
-    write(1, buffer, len);
-    printed_chars += len;
-    break;
-}
-```
-Konverton int në string.
+If an output error is encountered, a negative value is returned.
 
-`int len = snprintf(buffer, 50, "%d", num);`
 
-Ekzekutohet blloku i kodit pasi `switch (*p)` ka përcaktuar tipin e pointer-it bazuar tek karakteri akutal i string (vargut).
+## Examples
 
-`printed_chars++;`kalon në karakterin e radhës.
+**#include "holberton.h"**
 
-`break;` Mbaron veprimi.
+_printf("Hello Holberton"); **// the output will be: Hello Holberton**
 
-## Karakter me tip te pa caktuar.
-```
-default:
-{
-    write(1, p, 1);
-    printed_chars++;
-    break;
-}
+_printf("%c", 'H'); // **the output will be: H**
 
-else
-{
-    write(1, p, 1);
-    printed_chars++;
-}
-```
-Printohet karakteri
+_printf("%s", "Hello Holberton"); **// the output will be: Hello Holberton**
 
-`printed_chars++;`kalon në karakterin e radhës.
+_printf("%!\n"); **// the output will be '%!'**
 
-`break;` Mbaron veprimi.
+_printf("Complete the sentence: You %s nothing, Jon Snow.\n", "know"); **// the output will be: Complete the sentence: You know nothing, Jon Snow.**
 
-```
-va_end(args);
-```
-Përcaktohet fundi i `va_list`.
+_printf("%        s", "Hello"); **// the output will be: Hello**
 
-```
-return printed_chars;
-```
-Kthehet numri total i karaktereve të printuara përveç `'\0'`.
+_printf("%        k"); **// the output will be: % k**
+
+## Author
+
+**_printf()** is written and maintained by **Stilian Saka** and **Flavio Avdulla**
