@@ -13,6 +13,7 @@ int _printf(const char *format, ...)
 	int i = 0, count = 0;
 	char c;
 	char *str;
+	int num;
 
 	if (!format)
 		return (-1);
@@ -42,6 +43,11 @@ int _printf(const char *format, ...)
 						count++;
 					}
 					break;
+					case 'd':
+					case 'i':
+					num = va_arg(args, int);
+					count += printf_number(num);
+					break;
 				case '%':
 					putchar('%');
 					count++;
@@ -62,5 +68,32 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(args);
+	return (count);
+}
+
+/**
+ * print_number - Prints an integer to stdout
+ * @n: The integer to print
+ *
+ * Return: The number of characters printed
+ */
+int print_number(int n)
+{
+	int count = 0;
+	unsigned int num = n;
+
+	if (n < 0)
+	{
+		putchar('-');
+		count++;
+		num = -n;
+	}
+
+	if (num / 10)
+	count += print_number(num / 10);
+
+	putchar((num % 10) + '0');
+	count++;
+
 	return (count);
 }
