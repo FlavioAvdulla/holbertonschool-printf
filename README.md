@@ -1,27 +1,40 @@
-Custom _printf Implementation
-This project implements a simplified version of the C standard library function printf. It supports a limited set of format specifiers and demonstrates how to handle variadic arguments in C.
+# Custom _printf Implementation
 
-Overview
-The _printf function is designed to print formatted output to the standard output (stdout). It supports the following format specifiers:
+This project implements a simplified version of the C standard library function **printf**. It supports a limited set of format specifiers and demonstrates how to handle variadic arguments in C.
 
-%c - Print a single character
-%s - Print a string
-%d - Print an integer (decimal notation)
-%i - Print an integer (integer notation)
-%% - Print a literal percent sign
-Files
-main.h - Header file containing function prototypes and the print_data struct definition.
-print_functions.c - Contains implementations for the format specifier functions:
-pr_char - Prints a single character.
-pr_string - Prints a string, handling NULL strings by printing (null).
-pr_int - Prints an integer.
-_printf.c - Contains the implementation of the _printf function, which parses the format string and calls the appropriate print functions.
-Usage
-To use the custom _printf function, include the main.h header file and link the implementation files (print_functions.c and _printf.c) with your program.
+## Overview
 
-Example
-c
-Copy code
+The **_printf** function is designed to print formatted output to the standard output **(stdout)**. It supports the following format specifiers:
+
+**`%c`** - Print a single character
+
+**`%s`** - Print a string
+
+**`%d`** - Print an integer (decimal notation)
+
+**`%i`** - Print an integer (integer notation)
+
+**`%%`** - Print a literal percent sign
+
+## Files
+
+**1. main.h** - Header file containing function prototypes and the **print_data** struct definition.
+
+**2. print_functions.c** - Contains implementations for the format specifier functions:
+
+- **pr_char** - Prints a single character.
+- **pr_string** - Prints a string, handling NULL strings by printing (null).
+- **pr_int** - Prints an integer.
+
+**3. _printf.c** - Contains the implementation of the **_printf** function, which parses the format string and calls the appropriate print functions.
+
+## Usage
+
+To use the custom _printf function, include the main.h header file and link the implementation files `(print_functions.c and _printf.c)` with your program.
+
+## Example
+
+```
 #include "main.h"
 
 int main(void)
@@ -34,57 +47,66 @@ int main(void)
 
     return 0;
 }
-Compilation
+```
+## Compilation
+
 Compile the project using gcc or another C compiler:
 
-bash
-Copy code
+```
 gcc -o my_printf main.c print_functions.c _printf.c
-Replace main.c with your own source file that uses _printf.
+```
+Replace **main.c** with your own source file that uses **_printf**.
 
-Functions
-_printf
-c
-Copy code
+
+## Functions
+
+**_printf**
+
+```
 int _printf(const char *format, ...);
-Parameters:
+```
+**Parameters**:
 
-format: A format string containing format specifiers.
-...: Additional arguments corresponding to the format specifiers.
-Returns: The number of characters printed (excluding the null byte).
+- **format:** A format string containing format specifiers.
+- **...**: Additional arguments corresponding to the format specifiers.
 
-pr_char
-c
-Copy code
+**Returns**: The number of characters printed (excluding the null byte).
+
+## pr_char
+```
 int pr_char(va_list char_list);
-Parameters:
+```
+**Parameters:**
 
-char_list: A va_list containing the character to print.
-Returns: The number of characters printed (always 1).
+- char_list: A va_list containing the character to print.
+- Returns: The number of characters printed (always **1**).
 
-pr_string
-c
-Copy code
-int pr_string(va_list string_list);
-Parameters:
+## pr_string
 
-string_list: A va_list containing the string to print.
-Returns: The number of characters printed, including handling of NULL strings.
+`int pr_string(va_list string_list);`
 
-pr_int
-c
-Copy code
+**Parameters**:
+
+- string_list: A va_list containing the string to print.
+
+- Returns: The number of characters printed, including handling of NULL strings.
+
+## pr_int
+
+```
 int pr_int(va_list int_list);
-Parameters:
+```
+**Parameters**:
 
-int_list: A va_list containing the integer to print.
-Returns: The number of characters printed.
+- int_list: A va_list containing the integer to print.
+- Returns: The number of characters printed.
 
-Limitations
+## Limitations
 This implementation does not handle:
-Flag characters
-Field width
-Precision
-Length modifiers
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+- Flag characters
+- Field width
+- Precision
+- Length modifiers
+```
+**_printf()** is written and maintained by **Stilian Saka** and **Flavio Avdulla**.
+```
