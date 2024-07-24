@@ -2,20 +2,25 @@
 #define MAIN_H
 
 #include <stdarg.h>
-#include <unistd.h>
+
+/**
+ * struct print_data - structure for printing data
+ * @type: type of format
+ * @print: function for printing
+ */
+typedef struct print_data
+{
+    char *type;
+    int (*print)(va_list arg_list);
+} print_data;
 
 int _putchar(char c);
+
+int pr_char(va_list char_list);
+int pr_int(va_list int_list);
+int pr_string(va_list string_list);
+
 int _printf(const char *format, ...);
 
-typedef struct format_specifier
-{
-	char *specifier;
-	int (*print_func)(va_list);
-} format_specifier_t;
-
-
-int print_char(va_list args);
-int print_string(va_list args);
-int print_int(va_list args);
-
 #endif
+

@@ -1,77 +1,69 @@
+#include "main.h"
 #include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
+#include <stdlib.h>
 
 /**
-* _printf - produces output according to a format
-* @format: format string containing the characters and the specifiers
-* Return: number of characters printed (excluding the null byte)
-*/
+ * _printf - Custom printf function
+ * @format: Format string containing the directives
+ * @...: Additional arguments based on format specifiers
+ *
+ * Return: Number of characters printed (excluding null byte)
+ */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int printed_chars = 0;
-	const char *p;
+    va_list arg_list;
+    int j, i = 0, len = 0;
 
-	va_start(args, format);
-	for (p = format; *p != '\0'; p++)
-	{
-		if (*p == '%')
-		{
-			p++;
-			switch (*p)
-			{
-				case 'c':
-					{
-						char c = va_arg(args, int);
-						write(1, &c, 1);
-						printed_chars++;
-						break;
-					}
-				case 's':
-					{
-						char *str = va_arg(args, char *);
-						if (str == NULL)
-							str = "(null)";
-						while (*str)
-						{
-							write(1, str, 1);
-							str++;
-							printed_chars++;
-						}
-						break;
-					}
-				case '%':
-					{
-						char percent = '%';
-						write(1, &percent, 1);
-						printed_chars++;
-						break;
-					}
-				case 'd':
-				case 'i':
-					{
-						int num = va_arg(args, int);
-						char buffer[50];
-						int len = snprintf(buffer, 50, "%d", num);
-						write(1, buffer, len);
-						printed_chars += len;
-						break;
-					}
-				default:
-					{
-						write(1, p, 1);
-						printed_chars++;
-						break;
-					}
-			}
-		}
-		else
-		{
-			write(1, p, 1);
-			printed_chars++;
-		}
-	}
-	va_end(args);
-	return printed_chars;
+
+    print_data p_func[] = {
+        {"c", pr_char},
+        {"s", pr_string},
+        {"d", pr_int},
+        {"i", pr_int},
+        {NULL, NULL}
+    };
+
+    va_start(arg_list, format);
+
+
+    if (format == NULL)
+        return (0);
+
+    while (format[i] != '\0') {
+        if (format[i] == '%' && format[i+1] != '%') 
+        {
+            j = 0;
+
+            while (p_func[j].type != NULL)
+            {
+                if (format[i+1] == p_func[j].type[0])
+                {
+                    len += p_func[j].print(arg_list);
+                    i++;
+                    break;
+                }
+                j++;
+            }
+
+            if (p_func[j].type == NULL) {
+                _putchar('%');
+                len++;
+            }
+        }
+        else if (format[i] == '%' && format[i+1] == '%')
+        {
+            _putchar('%');
+            len++;
+            i++;
+        }
+        else 
+        {
+            _putchar(format[i]);
+            len++;
+        }
+        i++;
+    }
+
+    va_end(arg_list);
+    return (len);    
 }
