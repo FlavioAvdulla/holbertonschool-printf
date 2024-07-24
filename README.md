@@ -107,6 +107,5 @@ This implementation does not handle:
 - Field width
 - Precision
 - Length modifiers
-```
+
 **_printf()** is written and maintained by **Stilian Saka** and **Flavio Avdulla**.
-```
