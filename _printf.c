@@ -8,7 +8,7 @@
 * Return: The number of characters printed (excluding the null byte)
 */
 int _printf(const char *format, ...)
-	{
+{
 	va_list args;
 	int i = 0, count = 0;
 	char c;
@@ -43,8 +43,8 @@ int _printf(const char *format, ...)
 						count++;
 					}
 					break;
-					case 'd':
-					case 'i':
+				case 'd':
+				case 'i':
 					num = va_arg(args, int);
 					count += print_number(num);
 					break;
@@ -69,16 +69,16 @@ int _printf(const char *format, ...)
 
 	va_end(args);
 	return (count);
-}
+	}
 
-/**
- * print_number - Prints an integer to stdout
- * @n: The integer to print
- *
- * Return: The number of characters printed
- */
-int print_number(int n)
-{
+	/**
+	* print_number - Prints an integer to stdout
+	* @n: The integer to print
+	*
+	* Return: The number of characters printed
+	*/
+	int print_number(int n)
+	{
 	int count = 0;
 	unsigned int num = n;
 
@@ -90,7 +90,7 @@ int print_number(int n)
 	}
 
 	if (num / 10)
-	count += print_number(num / 10);
+		count += print_number(num / 10);
 
 	putchar((num % 10) + '0');
 	count++;
