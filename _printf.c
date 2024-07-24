@@ -1,99 +1,77 @@
-#include "main.h"
+#include <stdarg.h>
 #include <stdio.h>
+#include <unistd.h>
 
 /**
-* _printf - Produces output according to a format
-* @format: The format string
-*
-* Return: The number of characters printed (excluding the null byte)
+* _printf - produces output according to a format
+* @format: format string containing the characters and the specifiers
+* Return: number of characters printed (excluding the null byte)
 */
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, count = 0;
-	char c;
-	char *str;
-	int num;
-
-	if (!format)
-		return (-1);
+	int printed_chars = 0;
+	const char *p;
 
 	va_start(args, format);
-
-	while (format && format[i])
+	for (p = format; *p != '\0'; p++)
 	{
-		if (format[i] == '%')
+		if (*p == '%')
 		{
-			i++;
-			switch (format[i])
+			p++;
+			switch (*p)
 			{
 				case 'c':
-					c = va_arg(args, int);
-					putchar(c);
-					count++;
-					break;
-				case 's':
-					str = va_arg(args, char *);
-					if (!str)
-						str = "(null)";
-					while (*str)
 					{
-						putchar(*str);
-						str++;
-						count++;
+						char c = va_arg(args, int);
+						write(1, &c, 1);
+						printed_chars++;
+						break;
 					}
-					break;
+				case 's':
+					{
+						char *str = va_arg(args, char *);
+						if (str == NULL)
+							str = "(null)";
+						while (*str)
+						{
+							write(1, str, 1);
+							str++;
+							printed_chars++;
+						}
+						break;
+					}
+				case '%':
+					{
+						char percent = '%';
+						write(1, &percent, 1);
+						printed_chars++;
+						break;
+					}
 				case 'd':
 				case 'i':
-					num = va_arg(args, int);
-					count += print_number(num);
-					break;
-				case '%':
-					putchar('%');
-					count++;
-					break;
+					{
+						int num = va_arg(args, int);
+						char buffer[50];
+						int len = snprintf(buffer, 50, "%d", num);
+						write(1, buffer, len);
+						printed_chars += len;
+						break;
+					}
 				default:
-					putchar('%');
-					putchar(format[i]);
-					count += 2;
-					break;
+					{
+						write(1, p, 1);
+						printed_chars++;
+						break;
+					}
 			}
 		}
 		else
 		{
-			putchar(format[i]);
-			count++;
+			write(1, p, 1);
+			printed_chars++;
 		}
-		i++;
 	}
-
 	va_end(args);
-	return (count);
-	}
-
-	/**
-	* print_number - Prints an integer to stdout
-	* @n: The integer to print
-	*
-	* Return: The number of characters printed
-	*/
-	int print_number(int n)
-	{
-	int count = 0;
-	unsigned int num = n;
-
-	if (n < 0)
-	{
-		putchar('-');
-		count++;
-		num = -n;
-	}
-
-	if (num / 10)
-		count += print_number(num / 10);
-
-	putchar((num % 10) + '0');
-	count++;
-
-	return (count);
+	return printed_chars;
 }
