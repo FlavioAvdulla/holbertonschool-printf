@@ -93,18 +93,6 @@ void handle_num(int num, int *len)
 }
 
 /**
-* print_digit - Prints a single digit
-* @num: The digit to print
-* @len: Pointer to length of characters printed
-*/
-int print_digit(int num, int *len)
-{
-	_putchar(num + '0');
-	(*len)++;
-	return (*len);
-}
-
-/**
 * print_negative - Prints a negative sign
 * @len: Pointer to length of characters printed
 */
