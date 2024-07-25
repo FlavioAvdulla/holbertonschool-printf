@@ -96,6 +96,7 @@ void handle_num(int num, int *len)
 * print_digit - Prints a single digit
 * @num: The digit to print
 * @len: Pointer to length of characters printed
+* Return: length of pointer
 */
 int print_digit(int num, int *len)
 {
