@@ -19,7 +19,8 @@
 	*/
 	int pr_char(va_list char_list)
 	{
-		char letter = va_arg(char_list, int);
+		char letter = (char)va_arg(char_list, int);
+
 		_putchar(letter);
 		return (1);
 	}
@@ -55,20 +56,26 @@
 		int num = va_arg(int_list, int);
 		int len = 0;
 
-		if (num == 0)
+		if (num == INT_MIN)
+		{
+
+			_putchar('-');
+			_putchar('2');
+			num = 147483648;
+			len += 2;
+		}
+		else if (num < 0)
+		{
+			print_negative(&len);
+			num = -num;
+		}
+		else if (num == 0)
 		{
 			handle_zero(&len);
-		}
-		else
-		{
-			if (num < 0)
-			{
-				print_negative(&len);
-				num = -num;
-			}
-			handle_num(num, &len);
+			return (len);
 		}
 
+		handle_num(num, &len);
 		return (len);
 	}
 
@@ -79,13 +86,6 @@
 	*/
 	void handle_num(int num, int *len)
 	{
-		if (num == 0)
-		{
-			_putchar('0');
-			(*len)++;
-			return;
-		}
-
 		if (num / 10)
 			handle_num(num / 10, len);
 
@@ -105,7 +105,7 @@
 	}
 
 	/**
-	* print_negative - Prints a negative sign and handles INT_MIN
+	* print_negative - Prints a negative sign
 	* @len: Pointer to length of characters printed
 	*/
 	void print_negative(int *len)
