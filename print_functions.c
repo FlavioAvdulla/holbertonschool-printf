@@ -60,7 +60,11 @@ int pr_int(va_list int_list)
         is_negative = 1;
 
         if (num == INT_MIN) {
-            num = INT_MAX;
+            _putchar('-');
+            _putchar('2');
+            num = 147483648;
+            is_negative = 0;
+            len += 2;
         } else {
             num = -num;
         }
@@ -75,10 +79,6 @@ int pr_int(va_list int_list)
 
     if (is_negative) {
         buffer[i++] = '-';
-
-        if (num == INT_MAX) {
-            buffer[0] = '8';
-        }
     }
 
 
