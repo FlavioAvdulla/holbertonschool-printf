@@ -10,8 +10,8 @@
  */
 typedef struct print_data
 {
-    char *type;
-    int (*print)(va_list arg_list);
+	char *type;
+	int (*print)(va_list arg_list);
 } print_data;
 
 int _putchar(char c);
