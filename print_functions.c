@@ -20,7 +20,6 @@
 	int pr_char(va_list char_list)
 	{
 		char letter = va_arg(char_list, int);
-
 		_putchar(letter);
 		return (1);
 	}
