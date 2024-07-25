@@ -1,5 +1,3 @@
-
-Copy code
 #include "main.h"
 #include <stdarg.h>
 #include <stdlib.h>
