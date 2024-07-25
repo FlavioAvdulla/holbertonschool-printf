@@ -3,9 +3,9 @@
 	#include <limits.h>
 
 	/**
-	* handle_num - Handles positive numbers and prints them.
+	* handle_num - Recursively handles and prints positive integers.
 	* @num: The number to print.
-	* @len: Pointer to length of characters printed.
+	* @len: Pointer to the length of characters printed.
 	*/
 	void handle_num(int num, int *len)
 	{
@@ -23,9 +23,9 @@
 	}
 
 	/**
-	* print_digit - Prints a single digit.
+	* print_digit - Prints a single digit of a number.
 	* @num: The digit to print.
-	* @len: Pointer to length of characters printed.
+	* @len: Pointer to the length of characters printed.
 	*
 	* Return: Number of characters printed.
 	*/
@@ -38,7 +38,7 @@
 
 	/**
 	* print_negative - Prints a negative sign and handles INT_MIN.
-	* @len: Pointer to length of characters printed.
+	* @len: Pointer to the length of characters printed.
 	*/
 	void print_negative(int *len)
 	{
@@ -47,8 +47,8 @@
 	}
 
 	/**
-	* handle_zero - Prints zero.
-	* @len: Pointer to length of characters printed.
+	* handle_zero - Handles and prints the zero case.
+	* @len: Pointer to the length of characters printed.
 	*/
 	void handle_zero(int *len)
 	{
