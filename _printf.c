@@ -11,10 +11,6 @@
 	* @...: Additional arguments based on format specifiers
 	*
 	* Return: Number of characters printed or -1 if format is NULL
-	*
-	* Description: This function mimics the behavior of the standard printf
-	* function. It processes the format string and uses variadic arguments
-	* to print characters, strings, and integers based on specified format specifiers.
 	*/
 	int _printf(const char *format, ...)
 	{
@@ -54,11 +50,6 @@
 	* @i: Pointer to the current index in the format string
 	*
 	* Return: Number of characters printed for the format specifier
-	*
-	* Description: This function checks the character following the '%' in
-	* the format string to determine which format specifier is present. It
-	* calls the appropriate function to handle the printing of the argument
-	* corresponding to the format specifier.
 	*/
 	int handle_format(const char *format, va_list arg_list, int *i)
 	{
@@ -102,28 +93,9 @@
 	* @c: Character to print
 	*
 	* Return: Always 1 (number of characters printed)
-	*
-	* Description: This function outputs a single character to the standard
-	* output using the _putchar function.
 	*/
 	int print_char(char c)
 	{
-		_putchar(c);
-		return (1);
-	}
-
-	/**
-	* pr_char - Prints a character
-	* @arg_list: List of arguments
-	*
-	* Return: Number of characters printed
-	*
-	* Description: This function retrieves a character argument from the
-	* variadic list and prints it using the _putchar function.
-	*/
-	int pr_char(va_list arg_list)
-	{
-		char c = va_arg(arg_list, int);
 		_putchar(c);
 		return (1);
 	}
