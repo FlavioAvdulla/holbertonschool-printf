@@ -1,3 +1,5 @@
+
+Copy code
 #include "main.h"
 #include <stdarg.h>
 #include <stdlib.h>
@@ -14,7 +16,7 @@ int _printf(const char *format, ...)
     va_list arg_list;
     int j, i = 0, len = 0;
 
- 
+
     print_data p_func[] = {
         {"c", pr_char},
         {"s", pr_string},
@@ -30,7 +32,7 @@ int _printf(const char *format, ...)
         return (-1);
 
     while (format[i] != '\0') {
-        if (format[i] == '%' && format[i+1] != '%') 
+        if (format[i] == '%' && format[i+1] != '\0' && format[i+1] != '%') 
         {
             j = 0;
 
@@ -55,6 +57,10 @@ int _printf(const char *format, ...)
             _putchar('%');
             len++;
             i++;
+        }
+        else if (format[i] == '%' && format[i+1] == '\0')
+        {
+            return (-1);
         }
         else 
         {
