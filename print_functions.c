@@ -50,6 +50,12 @@ int pr_int(va_list int_list)
     int i = 0, is_negative = 0;
 
 
+    if (num == 0) {
+        _putchar('0');
+        return (1);
+    }
+
+
     if (num < 0) {
         is_negative = 1;
 
@@ -68,20 +74,10 @@ int pr_int(va_list int_list)
 
 
     if (is_negative) {
+        buffer[i++] = '-';
 
         if (num == INT_MAX) {
             buffer[0] = '8';
-            buffer[i++] = '4';
-            buffer[i++] = '6';
-            buffer[i++] = '3';
-            buffer[i++] = '7';
-            buffer[i++] = '4';
-            buffer[i++] = '8';
-            buffer[i++] = '1';
-            buffer[i++] = '2';
-            buffer[i++] = '-';
-        } else {
-            buffer[i++] = '-';
         }
     }
 
