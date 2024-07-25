@@ -10,7 +10,13 @@
 	* @format: Format string containing the directives
 	* @...: Additional arguments based on format specifiers
 	*
-	* Return: Number of characters printed or -1 if format is NULL
+	* Description: This function produces output according to a format, 
+	* similar to the standard printf function. It supports the following 
+	* conversion specifiers: %c, %s, %d, %i, and %%.
+	*
+	* Return: The number of characters printed (excluding the null byte 
+	* used to end output to strings). Returns -1 if the format string 
+	* is NULL or if an incomplete format specifier is detected.
 	*/
 	int _printf(const char *format, ...)
 	{
@@ -49,7 +55,10 @@
 	* @arg_list: List of arguments
 	* @i: Pointer to the current index in the format string
 	*
-	* Return: Number of characters printed for the format specifier
+	* Description: This function processes the format specifiers and 
+	* calls the appropriate function to handle the specific type.
+	*
+	* Return: The number of characters printed for the format specifier.
 	*/
 	int handle_format(const char *format, va_list arg_list, int *i)
 	{
@@ -92,7 +101,9 @@
 	* print_char - Prints a single character
 	* @c: Character to print
 	*
-	* Return: Always 1 (number of characters printed)
+	* Description: This function writes the character c to stdout.
+	*
+	* Return: Always 1 (number of characters printed).
 	*/
 	int print_char(char c)
 	{
