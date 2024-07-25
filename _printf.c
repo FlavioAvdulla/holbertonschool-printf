@@ -2,12 +2,15 @@
 	#include <stdarg.h>
 	#include <stdlib.h>
 
+	int handle_format(const char *format, va_list arg_list, int *i);
+	int print_char(char c);
+
 	/**
-	* _printf - Custom printf function.
-	* @format: Format string containing the directives.
-	* @...: Additional arguments based on format specifiers.
+	* _printf - Custom printf function
+	* @format: Format string containing the directives
+	* @...: Additional arguments based on format specifiers
 	*
-	* Return: Number of characters printed or -1 if format is NULL.
+	* Return: Number of characters printed or -1 if format is NULL
 	*/
 	int _printf(const char *format, ...)
 	{
@@ -41,12 +44,12 @@
 	}
 
 	/**
-	* handle_format - Handles format specifiers and prints the output.
-	* @format: Format string containing the directives.
-	* @arg_list: List of arguments.
-	* @i: Pointer to the current index in the format string.
+	* handle_format - Handles format specifiers and prints the output
+	* @format: Format string containing the directives
+	* @arg_list: List of arguments
+	* @i: Pointer to the current index in the format string
 	*
-	* Return: Number of characters printed for the format specifier.
+	* Return: Number of characters printed for the format specifier
 	*/
 	int handle_format(const char *format, va_list arg_list, int *i)
 	{
@@ -70,19 +73,26 @@
 			}
 		}
 
-		if (p_func[j].type == NULL)
+		if (format[*i + 1] == '%')
 		{
 			len += print_char('%');
+			(*i)++;
+		}
+		else
+		{
+			len += print_char('%');
+			len += print_char(format[*i + 1]);
+			(*i)++;
 		}
 
 		return (len);
 	}
 
 	/**
-	* print_char - Prints a single character.
-	* @c: Character to print.
+	* print_char - Prints a single character
+	* @c: Character to print
 	*
-	* Return: Always 1 (number of characters printed).
+	* Return: Always 1 (number of characters printed)
 	*/
 	int print_char(char c)
 	{

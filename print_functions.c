@@ -3,11 +3,19 @@
 	#include <stdlib.h>
 	#include <limits.h>
 
+	int pr_char(va_list char_list);
+	int pr_string(va_list string_list);
+	int pr_int(va_list int_list);
+	void handle_num(int num, int *len);
+	int print_digit(int num, int *len);
+	void print_negative(int *len);
+	void handle_zero(int *len);
+
 	/**
-	* pr_char - Prints a single character.
-	* @char_list: va_list containing the character to print.
+	* pr_char - Prints a single character
+	* @char_list: va_list containing the character to print
 	*
-	* Return: Number of characters printed.
+	* Return: Number of characters printed
 	*/
 	int pr_char(va_list char_list)
 	{
@@ -18,10 +26,10 @@
 	}
 
 	/**
-	* pr_string - Prints a string.
-	* @string_list: va_list containing the string to print.
+	* pr_string - Prints a string
+	* @string_list: va_list containing the string to print
 	*
-	* Return: Number of characters printed.
+	* Return: Number of characters printed
 	*/
 	int pr_string(va_list string_list)
 	{
@@ -38,10 +46,10 @@
 	}
 
 	/**
-	* pr_int - Prints an integer.
-	* @int_list: va_list containing the integer to print.
+	* pr_int - Prints an integer
+	* @int_list: va_list containing the integer to print
 	*
-	* Return: Number of characters printed.
+	* Return: Number of characters printed
 	*/
 	int pr_int(va_list int_list)
 	{
@@ -66,9 +74,9 @@
 	}
 
 	/**
-	* handle_num - Handles positive numbers and prints them.
-	* @num: The number to print.
-	* @len: Pointer to length of characters printed.
+	* handle_num - Handles positive numbers and prints them
+	* @num: The number to print
+	* @len: Pointer to length of characters printed
 	*/
 	void handle_num(int num, int *len)
 	{
@@ -86,11 +94,9 @@
 	}
 
 	/**
-	* print_digit - Prints a single digit.
-	* @num: The digit to print.
-	* @len: Pointer to length of characters printed.
-	*
-	* Return: Number of characters printed.
+	* print_digit - Prints a single digit
+	* @num: The digit to print
+	* @len: Pointer to length of characters printed
 	*/
 	int print_digit(int num, int *len)
 	{
@@ -100,8 +106,8 @@
 	}
 
 	/**
-	* print_negative - Prints a negative sign and handles INT_MIN.
-	* @len: Pointer to length of characters printed.
+	* print_negative - Prints a negative sign and handles INT_MIN
+	* @len: Pointer to length of characters printed
 	*/
 	void print_negative(int *len)
 	{
@@ -110,8 +116,8 @@
 	}
 
 	/**
-	* handle_zero - Prints zero.
-	* @len: Pointer to length of characters printed.
+	* handle_zero - Prints zero
+	* @len: Pointer to length of characters printed
 	*/
 	void handle_zero(int *len)
 	{
