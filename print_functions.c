@@ -1,81 +1,88 @@
-#include "main.h"
-#include <stdarg.h>
-#include <stdlib.h>
+	#include "main.h"
+	#include <stdarg.h>
+	#include <stdlib.h>
 
-/**
- * pr_char - Prints a single character
- * @char_list: va_list containing the character to print
- *
- * Return: Number of characters printed
- */
-int pr_char(va_list char_list)
-{
-    char letter = va_arg(char_list, int);
-    _putchar(letter);
-    return (1);
-}
+	/**
+	* pr_char - Prints a single character
+	* @char_list: va_list containing the character to print
+	*
+	* Return: Number of characters printed
+	*/
+	int pr_char(va_list char_list)
+	{
+		char letter = va_arg(char_list, int);
 
-/**
- * pr_string - Prints a string
- * @string_list: va_list containing the string to print
- *
- * Return: Number of characters printed
- */
-int pr_string(va_list string_list)
-{
-    int i;
-    char *word = va_arg(string_list, char*);
+		_putchar(letter);
 
-    if (word == NULL)
-        word = "(null)";
+		return (1);
+	}
 
-    for (i = 0; word[i] != '\0'; i++)
-        _putchar(word[i]);
+	/**
+	* pr_string - Prints a string
+	* @string_list: va_list containing the string to print
+	*
+	* Return: Number of characters printed
+	*/
+	int pr_string(va_list string_list)
+	{
+		int i;
+		char *word = va_arg(string_list, char*);
 
-    return (i);
-}
+		if (word == NULL)
+			word = "(null)";
 
-/**
- * pr_int - Prints an integer
- * @int_list: va_list containing the integer to print
- *
- * Return: Number of characters printed
- */
-int pr_int(va_list int_list)
-{
-    int num = va_arg(int_list, int);
-    int len = 0;
-    char buffer[12];
-    int i = 0, is_negative = 0;
+		for (i = 0; word[i] != '\0'; i++)
+			_putchar(word[i]);
 
+		return (i);
+	}
 
-    if (num == 0) {
-        _putchar('0');
-        return (1);
-    }
+	/**
+	* pr_int - Prints an integer
+	* @int_list: va_list containing the integer to print
+	*
+	* Return: Number of characters printed
+	*/
+	int pr_int(va_list int_list)
+	{
+		int num = va_arg(int_list, int);
+		int len = 0;
+		char buffer[12];
+		int i = 0, is_negative = 0;
 
 
-    if (num < 0) {
-        is_negative = 1;
-        num = -num;
-    }
+		if (num == 0)
+		{
+			_putchar('0');
+			return (1);
+		}
 
 
-    while (num > 0) {
-        buffer[i++] = (num % 10) + '0';
-        num /= 10;
-    }
+		if (num < 0)
+		{
+			is_negative = 1;
+			num = -num;
+		}
 
 
-    if (is_negative) {
-        buffer[i++] = '-';
-    }
+		while (num > 0)
+		{
+			buffer[i++] = (num % 10) + '0';
+			num /= 10;
+		}
 
 
-    for (i--; i >= 0; i--) {
-        _putchar(buffer[i]);
-        len++;
-    }
+		if (is_negative)
+		{
+			buffer[i++] = '-';
+		}
 
-    return len;
-}
+
+		for (i--; i >= 0; i--)
+		{
+			_putchar(buffer[i]);
+			len++;
+		}
+
+		return (len);
+	}
