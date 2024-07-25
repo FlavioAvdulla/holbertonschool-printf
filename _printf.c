@@ -19,7 +19,6 @@
 
 		va_start(arg_list, format);
 
-
 		if (format == NULL)
 			return (-1);
 
@@ -28,7 +27,8 @@
 			if (format[i] == '%' && format[i + 1] != '\0')
 			{
 				len += handle_format(format, arg_list, &i);
-			} else if (format[i] == '%' && format[i + 1] == '\0')
+			}
+			else if (format[i] == '%' && format[i + 1] == '\0')
 			{
 				return (-1);
 			}
@@ -55,7 +55,6 @@
 	{
 		int j, len = 0;
 
-
 		print_data p_func[] = {
 			{"c", pr_char},
 			{"s", pr_string},
@@ -74,10 +73,16 @@
 			}
 		}
 
-
-		if (p_func[j].type == NULL)
+		if (format[*i + 1] == '%')
 		{
 			len += print_char('%');
+			(*i)++;
+		}
+		else
+		{
+			len += print_char('%');
+			len += print_char(format[*i + 1]);
+			(*i)++;
 		}
 
 		return (len);
