@@ -50,42 +50,50 @@ int pr_int(va_list int_list)
     int i = 0, is_negative = 0;
 
 
-    if (num == 0) {
+    if (num == 0)
+    {
         _putchar('0');
         return (1);
     }
 
 
-    if (num < 0) {
+    if (num < 0)
+    {
         is_negative = 1;
 
-        if (num == INT_MIN) {
+        if (num == INT_MIN)
+        {
             _putchar('-');
             _putchar('2');
             num = 147483648;
             is_negative = 0;
             len += 2;
-        } else {
+        }
+        else
+        {
             num = -num;
         }
     }
 
 
-    while (num > 0) {
+    while (num > 0)
+    {
         buffer[i++] = (num % 10) + '0';
         num /= 10;
     }
 
 
-    if (is_negative) {
+    if (is_negative)
+    {
         buffer[i++] = '-';
     }
 
 
-    for (i--; i >= 0; i--) {
+    for (i--; i >= 0; i--)
+    {
         _putchar(buffer[i]);
         len++;
     }
 
-    return len;
+    return (len);
 }
