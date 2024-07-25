@@ -3,6 +3,14 @@
 	#include <stdlib.h>
 	#include <limits.h>
 
+	int pr_char(va_list char_list);
+	int pr_string(va_list string_list);
+	int pr_int(va_list int_list);
+	void handle_num(int num, int *len);
+	int print_digit(int num, int *len);
+	void print_negative(int *len);
+	void handle_zero(int *len);
+
 	/**
 	* pr_char - Prints a single character
 	* @char_list: va_list containing the character to print
@@ -12,6 +20,7 @@
 	int pr_char(va_list char_list)
 	{
 		char letter = va_arg(char_list, int);
+		
 		_putchar(letter);
 		return (1);
 	}
@@ -46,54 +55,72 @@
 	{
 		int num = va_arg(int_list, int);
 		int len = 0;
-		char buffer[12];
-		int i = 0, is_negative = 0;
-
 
 		if (num == 0)
 		{
-			_putchar('0');
-			return (1);
+			handle_zero(&len);
 		}
-
-
-		if (num < 0)
+		else
 		{
-			is_negative = 1;
-
-			if (num == INT_MIN)
+			if (num < 0)
 			{
-				_putchar('-');
-				_putchar('2');
-				num = 147483648;
-				is_negative = 0;
-				len += 2;
-			}
-			else
-			{
+				print_negative(&len);
 				num = -num;
 			}
-		}
-
-
-		while (num > 0)
-		{
-			buffer[i++] = (num % 10) + '0';
-			num /= 10;
-		}
-
-
-		if (is_negative)
-		{
-			buffer[i++] = '-';
-		}
-
-
-		for (i--; i >= 0; i--)
-		{
-			_putchar(buffer[i]);
-			len++;
+			handle_num(num, &len);
 		}
 
 		return (len);
+	}
+
+	/**
+	* handle_num - Handles positive numbers and prints them
+	* @num: The number to print
+	* @len: Pointer to length of characters printed
+	*/
+	void handle_num(int num, int *len)
+	{
+		if (num == 0)
+		{
+			_putchar('0');
+			(*len)++;
+			return;
+		}
+
+		if (num / 10)
+			handle_num(num / 10, len);
+
+		print_digit(num % 10, len);
+	}
+
+	/**
+	* print_digit - Prints a single digit
+	* @num: The digit to print
+	* @len: Pointer to length of characters printed
+	*/
+	int print_digit(int num, int *len)
+	{
+		_putchar(num + '0');
+		(*len)++;
+		return (*len);
+	}
+
+	/**
+	* print_negative - Prints a negative sign and handles INT_MIN
+	* @len: Pointer to length of characters printed
+	*/
+	void print_negative(int *len)
+	{
+		_putchar('-');
+		(*len)++;
+	}
+
+	/**
+	* handle_zero - Prints zero
+	* @len: Pointer to length of characters printed
+	*/
+	void handle_zero(int *len)
+	{
+		_putchar('0');
+		(*len)++;
 	}
