@@ -16,6 +16,29 @@ The **_printf** function is designed to print formatted output to the standard o
 
 **`%%`** - Print a literal percent sign
 
+# Implementation Scheme
+
+## Initialization
+- _printf initializes a va_list to handle the variable arguments.
+
+## Format String Parsing
+
+The format string is traversed character by character.
+
+## Format Specifier Handling
+
+- When a % character is encountered, handle_format is called to determine and process the specifier.
+- handle_format uses an array of structures (print_data) to map format specifiers to their corresponding functions.
+
+## Printing
+
+- Based on the specifier, the appropriate function (pr_char, pr_string, pr_int) is called to print the argument.
+- print_char is used to print individual characters, including literal % characters.
+
+## Return
+
+The total number of characters printed is returned.
+
 ## Files
 
 **1. main.h** - Header file containing function prototypes and the **print_data** struct definition.
