@@ -74,6 +74,10 @@ int main(void)
     return 0;
 }
 ```
+
+#
+#
+
 ## Compilation
 
 Compile the project using gcc or another C compiler:
@@ -83,6 +87,8 @@ gcc -o my_printf main.c print_functions.c _printf.c
 ```
 Replace **main.c** with your own source file that uses **_printf**.
 
+#
+#
 
 ## Functions
 
@@ -126,6 +132,9 @@ int pr_int(va_list int_list);
 
 - int_list: A va_list containing the integer to print.
 - Returns: The number of characters printed.
+
+#
+#
 
 ## Limitations
 This implementation does not handle:
