@@ -23,4 +23,3 @@ int pr_string(va_list string_list);
 int _printf(const char *format, ...);
 
 #endif
-
