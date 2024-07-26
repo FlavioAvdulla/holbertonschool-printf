@@ -1,126 +1,77 @@
 #include "main.h"
 #include <stdarg.h>
-#include <stdlib.h>
 #include <limits.h>
 
-int pr_char(va_list char_list);
-int pr_string(va_list string_list);
-int pr_int(va_list int_list);
-void handle_num(int num, int *len);
-int print_digit(int num, int *len);
-void print_negative(int *len);
-void handle_zero(int *len);
-
 /**
-* pr_char - Prints a single character
-* @char_list: va_list containing the character to print
-*
-* Return: Number of characters printed
-*/
+ * pr_char - Prints a single character
+ * @char_list: va_list containing the character to print
+ *
+ * Return: Number of characters printed
+ */
 int pr_char(va_list char_list)
 {
-	char letter = (char)va_arg(char_list, int);
-
-	_putchar(letter);
-	return (1);
+    char letter = (char)va_arg(char_list, int);
+    _putchar(letter);
+    return (1);
 }
 
 /**
-* pr_string - Prints a string
-* @string_list: va_list containing the string to print
-*
-* Return: Number of characters printed
-*/
+ * pr_string - Prints a string
+ * @string_list: va_list containing the string to print
+ *
+ * Return: Number of characters printed
+ */
 int pr_string(va_list string_list)
 {
-	int i;
-	char *word = va_arg(string_list, char*);
+    int i;
+    char *word = va_arg(string_list, char*);
 
-	if (word == NULL)
-		word = "(null)";
+    if (word == NULL)
+        word = "(null)";
 
-	for (i = 0; word[i] != '\0'; i++)
-		_putchar(word[i]);
+    for (i = 0; word[i] != '\0'; i++)
+        _putchar(word[i]);
 
-	return (i);
+    return (i);
 }
 
 /**
-* pr_int - Prints an integer
-* @int_list: va_list containing the integer to print
-*
-* Return: Number of characters printed
-*/
+ * pr_int - Prints an integer
+ * @int_list: va_list containing the integer to print
+ *
+ * Return: Number of characters printed
+ */
 int pr_int(va_list int_list)
 {
-	int num = va_arg(int_list, int);
-	int len = 0;
-
-	if (num == INT_MIN)
-	{
-
-		_putchar('-');
-		_putchar('2');
-		num = 147483648;
-		len += 2;
-	}
-	else if (num < 0)
-	{
-		print_negative(&len);
-		num = -num;
-	}
-	else if (num == 0)
-	{
-		handle_zero(&len);
-		return (len);
-	}
-
-	handle_num(num, &len);
-	return (len);
+    int num = va_arg(int_list, int);
+    return pr_int_rec(num, 0);
 }
 
 /**
-* handle_num - Handles positive numbers and prints them
-* @num: The number to print
-* @len: Pointer to length of characters printed
-*/
-void handle_num(int num, int *len)
+ * pr_int_rec - Recursively prints an integer
+ * @n: The integer to print
+ * @count: The count of characters printed so far
+ *
+ * Return: The updated count of characters printed
+ */
+int pr_int_rec(long int n, int count)
 {
-	if (num / 10)
-		handle_num(num / 10, len);
+    if (n == INT_MIN) {
+        _putchar('-');
+        _putchar('2');
+        n = 147483648; // INT_MIN without the leading '2'
+        count += 2; // Account for '-' and '2'
+    } else if (n < 0) {
+        _putchar('-');
+        n = -n;
+        count++;
+    }
 
-	print_digit(num % 10, len);
-}
+    if (n / 10)
+        count = pr_int_rec(n / 10, count + 1);
 
-/**
-* print_digit - Prints a single digit
-* @num: The digit to print
-* @len: Pointer to length of characters printed
-* Return: length of pointer
-*/
-int print_digit(int num, int *len)
-{
-	_putchar(num + '0');
-	(*len)++;
-	return (*len);
-}
+    _putchar(n % 10 + '0');
+    count++;
 
-/**
-* print_negative - Prints a negative sign
-* @len: Pointer to length of characters printed
-*/
-void print_negative(int *len)
-{
-	_putchar('-');
-	(*len)++;
-}
-
-/**
-* handle_zero - Prints zero
-* @len: Pointer to length of characters printed
-*/
-void handle_zero(int *len)
-{
-	_putchar('0');
-	(*len)++;
+    return count;
 }
