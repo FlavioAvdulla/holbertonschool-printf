@@ -45,6 +45,6 @@ int main(void)
 }
 .fi
 .SH AUTHOR
-Written by [Your Name].
+Written by [Stilian Saka, Flavio Avdulla].
 .SH SEE ALSO
 .BR printf (3)
