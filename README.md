@@ -39,6 +39,9 @@ The format string is traversed character by character.
 
 The total number of characters printed is returned.
 
+#
+#
+
 ## Files
 
 **1. main.h** - Header file containing function prototypes and the **print_data** struct definition.
